@@ -10,6 +10,9 @@ function Movies() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [selectedShow, setSelectedShow] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const showsPerPage = 12;
 
     useEffect(() => {
         const fetchShows = async () => {
@@ -39,6 +42,15 @@ function Movies() {
 
         fetchShows();
     }, [searchQuery]);
+
+    const totalPages = Math.ceil(shows.length / showsPerPage);
+
+    const startIndex = (currentPage - 1) * showsPerPage;
+
+    const currentShows = shows.slice(
+        startIndex,
+        startIndex + showsPerPage
+    );
 
     return (
         <main className="min-h-screen bg-white px-6 py-12">
@@ -83,7 +95,7 @@ function Movies() {
 
                 {!loading && !error && shows.length > 0 && (
                     <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        {shows.map((show) => (
+                        {currentShows.map((show) => (
                             <MovieCard
                                 key={show.id}
                                 show={show}
@@ -94,6 +106,37 @@ function Movies() {
                 )}
 
             </div>
+
+
+            {!loading && !error && totalPages > 1 && (
+                <div className="mt-10 flex items-center justify-center gap-2">
+
+                    <button
+                        type="button"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage((page) => page - 1)}
+                        className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                        Previous
+                    </button>
+
+                    <span className="px-4 text-sm text-gray-600">
+                        Page {currentPage} of {totalPages}
+                    </span>
+
+                    <button
+                        type="button"
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage((page) => page + 1)}
+                        className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                        Next
+                    </button>
+
+                </div>
+            )}
+
+
             <MovieModal
                 show={selectedShow}
                 onClose={() => setSelectedShow(null)}
