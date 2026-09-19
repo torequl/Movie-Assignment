@@ -7,7 +7,6 @@ function MovieModal({ show, onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-lg bg-white">
 
-        {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
@@ -16,21 +15,18 @@ function MovieModal({ show, onClose }) {
           ✕
         </button>
 
-        {/* Poster */}
         <img
           src={show.image?.original || show.image?.medium}
           alt={show.name}
           className="h-72 w-full object-cover"
         />
 
-        {/* Content */}
         <div className="p-6">
 
           <h2 className="text-3xl font-bold text-gray-900">
             {show.name}
           </h2>
 
-          {/* Meta */}
           <div className="mt-3 flex flex-wrap gap-4 text-sm text-gray-500">
             <span>
               ⭐ {show.rating?.average || "N/A"}
@@ -47,7 +43,6 @@ function MovieModal({ show, onClose }) {
             )}
           </div>
 
-          {/* Genres */}
           {show.genres?.length > 0 && (
             <div className="mt-5 flex flex-wrap gap-2">
               {show.genres.map((genre) => (
@@ -61,7 +56,6 @@ function MovieModal({ show, onClose }) {
             </div>
           )}
 
-          {/* Summary */}
           <div className="mt-6">
             <h3 className="text-lg font-semibold text-gray-900">
               Overview
@@ -75,7 +69,6 @@ function MovieModal({ show, onClose }) {
             />
           </div>
 
-          {/* Close */}
           <button
             type="button"
             onClick={onClose}
