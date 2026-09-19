@@ -2,29 +2,29 @@ import { Link } from "react-router";
 
 function Navbar() {
   return (
-    <nav className="border-b border-white/10 bg-slate-950">
+    <nav className="border-b border-slate-300 bg-white/20 sticky top-0 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
 
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-bold text-white"
+          className="text-2xl font-bold text-red-600"
         >
-          🎬
+          NEXTFLIX
         </Link>
 
         {/* Navigation */}
         <div className="md:flex hidden items-center gap-8">
           <Link
             to="/"
-            className="text-gray-300 transition hover:text-white"
+            className="text-slate-800 transition hover:text-slate-600"
           >
             Home
           </Link>
 
           <Link
             to="/movies"
-            className="text-gray-300 transition hover:text-white"
+            className="text-slate-800 transition hover:text-slate-600"
           >
             Movies
           </Link>
